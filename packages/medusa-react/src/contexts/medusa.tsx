@@ -32,6 +32,7 @@ interface MedusaProviderProps {
    * available within the request
    */
   publishableApiKey?: string
+  medusaClient: Medusa
 }
 
 export const MedusaProvider = ({
@@ -40,13 +41,13 @@ export const MedusaProvider = ({
   apiKey,
   publishableApiKey,
   children,
-}: MedusaProviderProps) => {
-  const medusaClient = new Medusa({
+  medusaClient = new Medusa({
     baseUrl,
     maxRetries: 0,
     apiKey,
     publishableApiKey,
-  })
+  }),
+}: MedusaProviderProps) => {
   return (
     <QueryClientProvider {...queryClientProviderProps}>
       <MedusaContext.Provider
